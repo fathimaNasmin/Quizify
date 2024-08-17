@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Matemasie&family=Merriweather:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Matemasie&family=Merriweather:wght@700&family=Moderustic:wght@300..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+:root{
+    --bg-color-primary-color: #134B70;
+    --bg-color-secondary-color: #EEEEEE;
+    --bg-color-button: #FFC94A;
+    --bg-color-button-hover:#fbb71a;
+    --text-color: #fff;
+    --bg-light-shade:#508C9B;
+    --bg-dark-shade:#201E43;
+    
+    --font-family-logo:"Matemasie", sans-serif;
+    --font-weight-logo:400;
+    --font-style-logo:normal;
+
+    --text-font-family: "Nunito Sans", sans-serif;
+    --text-font-optical-sizing: auto;
+    --text-font-style: normal;
+    --text-font-variation-settings:
+        "wdth" 100,
+        "YTLC" 500;
+}
