@@ -78,3 +78,39 @@
     background-color: var(--bg-color-button-hover);
     cursor: pointer;
 }
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .main-container{
+        width: 80%;
+    }
+    .logo-container{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+    }
+    .logo-container p{
+        font-size: 2rem;
+    }
+    .name-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 4% 0;
+    }
+    .start-button-container button{
+        font-size: 1.2em;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .main-container{
+        width: 40%;
+    }
+    .logo-container{
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        margin: 5% 0;
+    }
+}
