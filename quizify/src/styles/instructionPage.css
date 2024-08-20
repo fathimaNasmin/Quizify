@@ -1,0 +1,81 @@
+.instruction-background{
+    background-color: var(--bg-color-secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.instruction-container{
+    background-color: var(--text-color);
+    border-radius: 10px;
+    padding: 5% 3%;
+    margin: 0 10%;
+    box-shadow: 1px 1px 5px 4px rgba(96, 96, 96, 0.3); 
+    display: flex;
+    flex-direction: column;
+}
+.instruction-container h2{
+    text-align: center;
+    margin-bottom: 2%;
+    font-family: var(--text-font-family);
+}
+.instruction-container ol li{
+    font-family: var(--text-font-family);
+    margin: 1.1% 0;
+}
+.instruction-container button{
+    background-color: var(--bg-color-primary-color);
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2em;
+    margin: 2% 0;
+    padding: 1% 8%;
+    border-radius: 50px;
+    width: 100%;
+    font-family: var(--text-font-family);
+    font-weight: 600;
+    font-style:var(--text-font-style);
+}
+.instruction-container button:hover{
+    background-color: var(--bg-color-button-hover);
+    cursor: pointer;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .instruction-container{
+        margin: 0 5%;
+    }
+    .instruction-container h2{
+        font-size: 1.1em;
+    }
+    .instruction-container ol li{
+        margin: 0% 0.8%;
+        font-size: 1em;
+    }
+    .instruction-container button{
+        font-size: 0.9em;
+        margin: 2% 0;
+        padding: 1% 8%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .instruction-container{
+        margin: 0 5%;
+    }
+    .instruction-container h2{
+        font-size: 1.2em;
+    }
+    .instruction-container ol li{
+        margin: 0% 0.8%;
+        font-size: 1.1em;
+    }
+    .instruction-container button{
+        font-size: 1em;
+        margin: 2% 0;
+        padding: 1% 8%;
+    }
+}
