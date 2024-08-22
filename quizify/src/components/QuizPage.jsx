@@ -8,10 +8,20 @@ import styled from 'styled-components';
 import Form from "./Partials/Form";
 
 export default function QuizPage() {
+  const wrapper = {
+    display:'flex',
+    flexDirection:'column',
+    width:'60%',
+    justifyContent:'center',
+    alignItems:'center',
+    margin:'3% 0'
+  }
   return <div className="quiz-background">
     <QuestionNo/>
     <Timer/>
-    <Question/>
-    <Form/>
+    <div style={wrapper}>
+      <Question/>
+      <Form/>
+    </div>
   </div>
 }

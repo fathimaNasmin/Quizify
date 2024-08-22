@@ -8,8 +8,9 @@ export default function Question() {
       alignItems: "center",
       backgroundColor: "#fff",
       borderRadius: "10px",
-      margin:'5% 0',
-      padding:'3%'
+      width:'100%',
+      margin:'2% 0',
+      padding:'2% 0'
     };
     const paraStyle = {
       display: "flex",
