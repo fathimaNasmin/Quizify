@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Question() {
+export default function Question(props) {
     const bgStyle = {
       display: "flex",
       flexDirection: "column",
@@ -25,7 +25,7 @@ export default function Question() {
     return (
       <div style={bgStyle}>
         <p style={paraStyle}>
-          a sentence worded or expressed so as to elicit information.
+          {props.questionText}
         </p>
       </div>
     );
