@@ -8,10 +8,14 @@ export default function LandingPage(){
     const [participants, setParticipants] = useState([]);
     const navigate = useNavigate();
 
+    // Handle start button click
     const handleClick = () =>{
-        setParticipants({name: name, score: 0})
-        setName("");
-        navigate('/instruction', {replace:true})
+        if (name.trim() !== ''){
+            setParticipants([...participants, {name: name, score: 0}])
+            setName("");
+            navigate('/instruction', {replace:true})
+
+        }
     }
 
     return <div className="background">
