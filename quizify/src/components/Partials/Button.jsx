@@ -41,6 +41,7 @@ export default function Button(props) {
       onMouseLeave={() => {
         setIsHovered(false)
       }}
+      onClick={props.onClick}
     >
       {props.text}
     </button>

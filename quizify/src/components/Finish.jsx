@@ -3,9 +3,11 @@ import { useLocation } from "react-router-dom";
 import { questions } from "../../questions";
 import "../styles/style.css";
 import Button from "./Partials/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function Finish() {
   const location = useLocation();
+  const navigate = useNavigate()
   const { score } = location.state;
 
   const bgStyle = {
@@ -63,6 +65,12 @@ export default function Finish() {
     fontFamily: "var(--text-font-family)",
     fontWeight: "500",
   };
+
+  // onclick event to navigate to quiz for start over
+  const startOver = () => {
+    navigate('/')
+  };
+
   return (
     <div style={bgStyle}>
       <div style={wrapper}>
@@ -84,7 +92,7 @@ export default function Finish() {
             <p style={pTagStyle}>9/10</p>
           </div>
         </div>
-        <Button type="submit" text="Start Over"/>
+        <Button onClick={startOver} type="button" text="Start Over"/>
       </div>
     </div>
   );
