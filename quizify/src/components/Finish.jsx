@@ -83,10 +83,15 @@ export default function Finish() {
         </div>
         <h3>Scoreboard</h3>
         <div style={scoreBoard}>
-          <div style={participants}>
-            <p style={pTagStyle}>Name</p>
-            <p style={pTagStyle}>3/10</p>
-          </div>
+          {participants.map((person, index)=>{
+            return (
+              <div key={index} style={participants}>
+                <p style={pTagStyle}>{person.name}</p>
+                <p style={pTagStyle}>{person.score}/questions.length</p>
+              </div>
+            );
+          })}
+
           <div style={participants}>
             <p style={pTagStyle}>Name</p>
             <p style={pTagStyle}>9/10</p>

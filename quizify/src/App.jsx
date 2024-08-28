@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import LandingPage from './components/LandingPage';
 import InstructionPage from "./components/InstructionPage";
 import QuizPage from './components/QuizPage';
