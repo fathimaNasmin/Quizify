@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import Options from "./Options";
 import { questions } from "../../../questions";
 import { useNavigate } from "react-router-dom";
+import { ParticipantsContext } from "../context/participants";
 
 export default function Form(props) {
+  const {
+    currentParticipant,
+    setCurrentParticipant,
+    participants,
+    setParticipants,
+  } = useContext(ParticipantsContext);
   // state to select the option
   const [selectedOption, setSelectedOption] = useState("");
+  // state to navigate to next page after updating other states.
+  const [navigateNow, setNavigateNow] = useState(false);
   const navigate = useNavigate();
 
   // Function for handling the option change
@@ -24,28 +33,60 @@ export default function Form(props) {
     alignItems: "center",
   };
 
-  
+  useEffect(() => {
+    if (navigateNow) {
+      setParticipants((prevState) => [{ ...currentParticipant }, ...prevState]);
+      // Navigate to the finish page with updated score
+      navigate("/finish", { replace: true });
+    }
+  }, [navigateNow, currentParticipant, setParticipants, navigate]);
+
+  // Update the score in currentParticipant state
+  const updateScoreInState = async () => {
+    setCurrentParticipant((current) => ({
+      ...current,
+      score: current.score + 1,
+    }));
+  };
+
+  // Function to render the next question
+  const nextQuestion = () => {
+    setSelectedOption("");
+    props.setCurrentIndex(props.currentIndex + 1);
+  };
+
+
   // Fucntion to submit the answer of the question
   const submitAnswer = (event) => {
     event.preventDefault();
 
-    // calculate the updated score
-    const updatedScore = selectedOption === props.answer ? props.score + 1 : props.score;
-
     // check the user's answer with correct answer
-    if (selectedOption === props.answer){
-      props.setScore(updatedScore)
-    }
-    // render the next question
-    if(props.currentIndex < questions.length - 1){
-      setSelectedOption("")
-      props.setCurrentIndex(props.currentIndex + 1)
-    }else{
-      console.log("quiz completed");
-      console.log("You scored : ", props.score);
+    if (selectedOption === props.answer) {
+      updateScoreInState()
+        .then(() => {
+          console.log("state updated");
 
-      // Navigate to the finish page with updated score
-      navigate('/finish', {state: {score: updatedScore}})
+          // if it is last question, end the quiz
+          // update the participants list
+          if (props.currentIndex >= questions.length - 1) {
+            setNavigateNow(true);
+          } else {
+            // render the next question
+            nextQuestion();
+          }
+        })
+        .catch((error) => {
+          console.log("error on state updation: ", error);
+        });
+    } else {
+       if (props.currentIndex >= questions.length - 1) {
+         setNavigateNow(true);
+       }else{
+         // if the answer is wrong,
+         // render the next question
+         nextQuestion();
+
+       }
     }
   };
 

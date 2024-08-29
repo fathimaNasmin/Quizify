@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { questions } from "../../questions";
 import "../styles/style.css";
 import Button from "./Partials/Button";
 import { useNavigate } from "react-router-dom";
+import { ParticipantsContext } from "./context/participants";
 
 export default function Finish() {
+  // useContext
+  const {
+    participants,
+    setParticipants,
+    currentParticipant,
+    setCurrentParticipant,
+  } = useContext(ParticipantsContext);
   const location = useLocation();
-  const navigate = useNavigate()
-  const { score } = location.state;
+  const navigate = useNavigate();
 
   const bgStyle = {
     backgroundColor: "var(--bg-color-secondary-color)",
@@ -48,14 +55,14 @@ export default function Finish() {
     width: "100%",
     boxSizing: "border-box",
   };
-  const participants = {
+  const participantsStyle = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems:'center',
+    alignItems: "center",
     backgroundColor: "var(--text-color)",
     margin: "10px 0%",
-    padding:"0% 2%",
+    padding: "0% 2%",
     borderRadius: "10px",
     width: "100%",
   };
@@ -68,7 +75,8 @@ export default function Finish() {
 
   // onclick event to navigate to quiz for start over
   const startOver = () => {
-    navigate('/')
+    setCurrentParticipant({name:"", score: 0})
+    navigate("/");
   };
 
   return (
@@ -77,27 +85,24 @@ export default function Finish() {
         <div style={scoreContainer}>
           <h1>Quiz Completed!</h1>
           <p>
-            Your Score: {score} out of {questions.length}
+            You Scored: {currentParticipant.score} out of {questions.length}
           </p>
           <p>completed in 30 seconds</p>
         </div>
         <h3>Scoreboard</h3>
         <div style={scoreBoard}>
-          {participants.map((person, index)=>{
+          {participants.map((person, index) => {
             return (
-              <div key={index} style={participants}>
+              <div key={index} style={participantsStyle}>
                 <p style={pTagStyle}>{person.name}</p>
-                <p style={pTagStyle}>{person.score}/questions.length</p>
+                <p style={pTagStyle}>
+                  {person.score}/{questions.length}
+                </p>
               </div>
             );
           })}
-
-          <div style={participants}>
-            <p style={pTagStyle}>Name</p>
-            <p style={pTagStyle}>9/10</p>
-          </div>
         </div>
-        <Button onClick={startOver} type="button" text="Start Over"/>
+        <Button onClick={startOver} type="button" text="Start Over" />
       </div>
     </div>
   );

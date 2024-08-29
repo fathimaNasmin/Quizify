@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function QuestionNo() {
+export default function QuestionNo({currentIndex, length}) {
     const questionNoStyling = {
       display: "flex",
       flexDirection: "column",
@@ -12,5 +12,5 @@ export default function QuestionNo() {
       fontWeight:'500',
       margin:'2% 0'
     };
-    return <div style={questionNoStyling}>7/10</div>
+    return <div style={questionNoStyling}>{currentIndex + 1}/{length}</div>
 };

@@ -9,8 +9,6 @@ import Form from "./Partials/Form";
 import { questions } from "../../questions";
 
 export default function QuizPage() {
-  // Track the score
-  const [score, setScore] = useState(0);
   // state to track the question index
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentQuestion = questions[currentIndex];
@@ -26,7 +24,7 @@ export default function QuizPage() {
   };
   return (
     <div className="quiz-background">
-      <QuestionNo />
+      <QuestionNo currentIndex={currentIndex} length={questions.length}/>
       <Timer />
 
       <div style={wrapper}>
@@ -36,8 +34,6 @@ export default function QuizPage() {
           answer={currentQuestion.answer}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
-          score={score}
-          setScore={setScore}
         />
       </div>
     </div>
