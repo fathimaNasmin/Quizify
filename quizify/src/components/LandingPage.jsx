@@ -5,12 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ParticipantsContext } from "./context/participants";
 
 export default function LandingPage() {
-  const {
-    participants,
-    setParticipants,
-    currentParticipants,
-    setCurrentParticipant,
-  } = useContext(ParticipantsContext);
+  const { setCurrentParticipant } = useContext(ParticipantsContext);
 
   const [name, setName] = useState("");
   // state to store error message if the user doesn't enter the name
@@ -20,7 +15,7 @@ export default function LandingPage() {
   // Handle start button click
   const handleClick = () => {
     if (name.trim() !== "") {
-      setCurrentParticipant((prevState)=>({...prevState, name:name}))
+      setCurrentParticipant((prevState) => ({ ...prevState, name: name }));
       setName("");
       setError("");
       navigate("/instruction", { replace: true });

@@ -33,60 +33,64 @@ export default function Form(props) {
     alignItems: "center",
   };
 
+  const isLastQuestion = props.currentIndex >= questions.length - 1;
+
   useEffect(() => {
     if (navigateNow) {
-      setParticipants((prevState) => [{ ...currentParticipant }, ...prevState]);
       // Navigate to the finish page with updated score
       navigate("/finish", { replace: true });
     }
-  }, [navigateNow, currentParticipant, setParticipants, navigate]);
+  }, [navigateNow, navigate]);
+
+  useEffect(() => {
+    console.log(currentParticipant);
+    console.log(participants);
+  }, [currentParticipant, participants]);
 
   // Update the score in currentParticipant state
   const updateScoreInState = async () => {
-    setCurrentParticipant((current) => ({
-      ...current,
-      score: current.score + 1,
-    }));
+    return new Promise((resolve) => {
+      setCurrentParticipant((current) => {
+        const updatedParticipant = { ...current, score: current.score + 1 };
+        resolve(updatedParticipant);
+        return updatedParticipant;
+      });
+    });
   };
 
-  // Function to render the next question
-  const nextQuestion = () => {
-    setSelectedOption("");
-    props.setCurrentIndex(props.currentIndex + 1);
+  // Function to handle end of quiz
+  const handleEndQuiz = async () => {
+    const updatedParticipant = await updateScoreInState();
+    // Add the updated currentParticipant to the participants list
+    setParticipants((prevState) => [updatedParticipant, ...prevState]);
+    setNavigateNow(true);
   };
 
+  //function to check the answer
+  const checkAnswer = () => {
+    if (selectedOption === props.answer) {
+      return true;
+    }
+    return false;
+  };
 
   // Fucntion to submit the answer of the question
   const submitAnswer = (event) => {
     event.preventDefault();
 
-    // check the user's answer with correct answer
-    if (selectedOption === props.answer) {
-      updateScoreInState()
-        .then(() => {
-          console.log("state updated");
+    const res = checkAnswer();
+    if (res && isLastQuestion) {
+      handleEndQuiz();
+    } else if (res) {
+      setCurrentParticipant((current) => ({
+        ...current,
+        score: current.score + 1,
+      }));
+    }
 
-          // if it is last question, end the quiz
-          // update the participants list
-          if (props.currentIndex >= questions.length - 1) {
-            setNavigateNow(true);
-          } else {
-            // render the next question
-            nextQuestion();
-          }
-        })
-        .catch((error) => {
-          console.log("error on state updation: ", error);
-        });
-    } else {
-       if (props.currentIndex >= questions.length - 1) {
-         setNavigateNow(true);
-       }else{
-         // if the answer is wrong,
-         // render the next question
-         nextQuestion();
-
-       }
+    if (!isLastQuestion) {
+      setSelectedOption("");
+      props.setCurrentIndex(props.currentIndex + 1);
     }
   };
 
