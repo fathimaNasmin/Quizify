@@ -42,11 +42,6 @@ export default function Form(props) {
     }
   }, [navigateNow, navigate]);
 
-  useEffect(() => {
-    console.log(currentParticipant);
-    console.log(participants);
-  }, [currentParticipant, participants]);
-
   // Update the score in currentParticipant state
   const updateScoreInState = async () => {
     return new Promise((resolve) => {

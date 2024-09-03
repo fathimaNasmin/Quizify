@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Timer({onTimesUp}) {
   const timerStyle = {
@@ -34,7 +34,7 @@ export default function Timer({onTimesUp}) {
 
     return () => clearInterval(timerInterval);
   }, [timeLeft]);
-  // console.log(timeLeft);
+
 
   // Format the time as minutes and seconds
   const formatTime = () => {
@@ -46,6 +46,3 @@ export default function Timer({onTimesUp}) {
   return <div style={timerStyle}>{formatTime()}</div>;
 }
 
-
-// show timeout message in finish page
-// style the timer
