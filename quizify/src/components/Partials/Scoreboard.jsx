@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { ParticipantsContext } from "../context/participants";
-import { questions } from "../../../questions";
+import { randomQuestions } from "../../../questions";
 
 export default function Scoreboard() {
   const { participants } = useContext(ParticipantsContext);
@@ -44,7 +44,7 @@ export default function Scoreboard() {
             <div key={index} style={participantsStyle}>
               <p style={pTagStyle}>{person.name}</p>
               <p style={pTagStyle}>
-                {person.score}/{questions.length}
+                {person.score}/{randomQuestions.length}
               </p>
             </div>
           );

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import Options from "./Options";
-import { questions } from "../../../questions";
+import { randomQuestions } from "../../../questions";
 import { useNavigate } from "react-router-dom";
 import { ParticipantsContext } from "../context/participants";
 
@@ -33,7 +33,7 @@ export default function Form(props) {
     alignItems: "center",
   };
 
-  const isLastQuestion = props.currentIndex >= questions.length - 1;
+  const isLastQuestion = props.currentIndex >= randomQuestions.length - 1;
 
   useEffect(() => {
     if (navigateNow) {
@@ -100,7 +100,7 @@ export default function Form(props) {
           handleOptionChange={handleOptionChange}
         />
       ))}
-      {props.currentIndex === questions.length - 1 ? (
+      {props.currentIndex === randomQuestions.length - 1 ? (
         <Button type="submit" text="Finish" />
       ) : (
         <Button type="submit" text="Next" />

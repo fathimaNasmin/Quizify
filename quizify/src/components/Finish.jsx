@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { questions } from "../../questions";
+import { randomQuestions } from "../../questions";
 import "../styles/style.css";
 import Button from "./Partials/Button";
 import { useNavigate } from "react-router-dom";
@@ -64,10 +64,11 @@ export default function Finish() {
           <h3>{timeOut && "Timeout"}</h3>
 
           <p>
-            You Scored: {currentParticipant.score} out of {questions.length}
+            You Scored: {currentParticipant.score} out of{" "}
+            {randomQuestions.length}
           </p>
         </div>
-        <Scoreboard/>
+        <Scoreboard />
         <Button onClick={startOver} type="button" text="Start Over" />
       </div>
     </div>

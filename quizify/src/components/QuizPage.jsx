@@ -6,13 +6,13 @@ import Timer from "./Partials/Timer";
 import Question from "./Partials/Question";
 import styled from "styled-components";
 import Form from "./Partials/Form";
-import { questions } from "../../questions";
+import { randomQuestions } from "../../questions";
 import { ParticipantsContext } from "../components/context/participants.jsx";
 
 export default function QuizPage() {
   // state to track the question index
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentQuestion = questions[currentIndex];
+  const currentQuestion = randomQuestions[currentIndex];
   // state to track the timeout status
   const [isTimeOut, setIsTimeOut] = useState(false);
 
@@ -60,7 +60,7 @@ export default function QuizPage() {
   };
   return (
     <div className="quiz-background">
-      <QuestionNo currentIndex={currentIndex} length={questions.length} />
+      <QuestionNo currentIndex={currentIndex} length={randomQuestions.length} />
       <Timer onTimesUp={handleTimeOut} />
 
       <div style={wrapper}>
