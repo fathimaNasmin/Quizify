@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-export default function Timer({onTimesUp}) {
+export default function Timer({ onTimesUp }) {
   const timerStyle = {
-    backgroundColor: "#fff",
     width: "110px",
     height: "110px",
     borderRadius: "50%",
-    border: "5px solid var(--bg-color-primary-color)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -17,7 +16,7 @@ export default function Timer({onTimesUp}) {
     fontWeight: "500",
   };
 
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(300);
 
   useEffect(() => {
     // Start the timer when the component renders
@@ -35,14 +34,27 @@ export default function Timer({onTimesUp}) {
     return () => clearInterval(timerInterval);
   }, [timeLeft]);
 
-
   // Format the time as minutes and seconds
   const formatTime = () => {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
-    return `0${minutes}: ${seconds < 10 ? "0" : ""}${seconds}`;
+    return (
+      <div style={timerStyle}>{`0${minutes}: ${
+        seconds < 10 ? "0" : ""
+      }${seconds}`}</div>
+    );
   };
 
-  return <div style={timerStyle}>{formatTime()}</div>;
+  return (
+    <CountdownCircleTimer
+      isPlaying
+      duration={300}
+      colors={"#134B70"}
+      colorsTime={[10, 6, 3, 0]}
+      size={130}
+      strokeWidth={10}
+    >
+      {({ timeLeft }) => formatTime(timeLeft)}
+    </CountdownCircleTimer>
+  );
 }
-
