@@ -6,6 +6,7 @@ import Button from "./Partials/Button";
 import { useNavigate } from "react-router-dom";
 import { ParticipantsContext } from "./context/participants";
 import Scoreboard from "./Partials/Scoreboard";
+import Confetti from "react-confetti";
 
 export default function Finish() {
   // useContext
@@ -17,7 +18,8 @@ export default function Finish() {
   } = useContext(ParticipantsContext);
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { timeOut } = state?.timeOut??false;
+  const { timeOut } = state?.timeOut ?? false;
+
 
   const bgStyle = {
     backgroundColor: "var(--bg-color-secondary-color)",
@@ -48,8 +50,6 @@ export default function Finish() {
     width: "100%",
   };
 
-  
-
   // onclick event to navigate to quiz for start over
   const startOver = () => {
     setCurrentParticipant({ name: "", score: 0 });
@@ -58,6 +58,7 @@ export default function Finish() {
 
   return (
     <div style={bgStyle}>
+      <Confetti />
       <div style={wrapper}>
         <div style={scoreContainer}>
           <h1>Quiz Completed!</h1>
