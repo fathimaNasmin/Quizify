@@ -17,20 +17,19 @@ export default function InstructionPage() {
         <ol>
           <li>The Objective of the quiz is just for fun and get knowledge.</li>
           <li>All age group can be participate.</li>
-          <li>You have 30 minutes to complete the quiz.</li>
+          <li>You have 5 minutes to complete the quiz.</li>
           <li>
-            Each MCQ has one correct answer. Select the best answer from the
-            options provided.
+            Each MCQ has one correct answer.
           </li>
           <li>
             Each correct answer is worth 1 point. There is no penalty for
             incorrect answers.
           </li>
           <li>
-            Use the 'Next' and 'Previous' buttons to navigate between questions.
+            Use the 'Next' buttons to navigate next questions.
           </li>
           <li>
-            Click 'Submit' when you have answered all questions. You will not be
+            Click 'Finish' when you have answered all questions. You will not be
             able to make changes after submission.
           </li>
           <li>
