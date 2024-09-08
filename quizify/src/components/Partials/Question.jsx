@@ -21,6 +21,7 @@ export default function Question(props) {
       fontSize: "1.2em",
       fontFamily: "var(--text-font-family)",
       fontWeight: "500",
+      padding:'0 10%'
     };
     return (
       <div style={bgStyle}>

@@ -31,7 +31,8 @@ export default function QuizPage() {
   const wrapper = {
     display: "flex",
     flexDirection: "column",
-    width: "60%",
+    width: "90%", // Set width to 100% for full responsiveness
+    maxWidth: "800px",
     justifyContent: "center",
     alignItems: "center",
     margin: "3% 0",
