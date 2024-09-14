@@ -3,9 +3,11 @@ import "../styles/landingPage.css";
 import "../styles/style.css";
 import { useNavigate } from "react-router-dom";
 import { ParticipantsContext } from "./context/participants";
+import { createUser } from "../appwrite/appwrite";
 
 export default function LandingPage() {
-  const { setCurrentParticipant } = useContext(ParticipantsContext);
+  const { setCurrentParticipant } =
+    useContext(ParticipantsContext);
 
   const [name, setName] = useState("");
   // state to store error message if the user doesn't enter the name
@@ -13,9 +15,17 @@ export default function LandingPage() {
   const navigate = useNavigate();
 
   // Handle start button click
-  const handleClick = () => {
+  const handleClick = async() => {
     if (name.trim() !== "") {
-      setCurrentParticipant((prevState) => ({ ...prevState, name: name }));
+      // Directly add the new participant to the database
+      const newUser = await createUser({ name, score: 0 });
+
+      // Update the currentParticipant with the new user's id, name, and score
+      setCurrentParticipant({
+        id: newUser.$id,
+        name: newUser.name,
+        score: newUser.score,
+      });
       setName("");
       setError("");
       navigate("/instruction", { replace: true });
@@ -25,9 +35,10 @@ export default function LandingPage() {
   };
 
   // Handle input change
-  const handleNameInput = (event) => {
+  const handleNameInput = async (event) => {
     setName(event.target.value);
     if (event.target.value.trim() !== "") {
+      await new Promise((resolve) => setTimeout(resolve, 500)); 
       setError("");
     }
   };

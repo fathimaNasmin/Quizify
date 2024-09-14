@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { randomQuestions } from "../../questions";
 import "../styles/style.css";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ParticipantsContext } from "./context/participants";
 import Scoreboard from "./Partials/Scoreboard";
 import Confetti from "react-confetti";
+import { getAllParticipants } from "../appwrite/appwrite";
 
 export default function Finish() {
   // useContext
@@ -19,7 +20,6 @@ export default function Finish() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { timeOut } = state?.timeOut ?? false;
-
 
   const bgStyle = {
     backgroundColor: "var(--bg-color-secondary-color)",
@@ -49,6 +49,7 @@ export default function Finish() {
     alignItems: "center",
     width: "100%",
   };
+
 
   // onclick event to navigate to quiz for start over
   const startOver = () => {

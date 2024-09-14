@@ -5,6 +5,7 @@ import Options from "./Options";
 import { randomQuestions } from "../../../questions";
 import { useNavigate } from "react-router-dom";
 import { ParticipantsContext } from "../context/participants";
+import { editUserData } from "../../appwrite/appwrite";
 
 export default function Form(props) {
   const {
@@ -56,9 +57,17 @@ export default function Form(props) {
   // Function to handle end of quiz
   const handleEndQuiz = async () => {
     const updatedParticipant = await updateScoreInState();
+    // Patch user score in db
+    editUserData(updatedParticipant)
+      .then(() => {
+        setNavigateNow(true);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
     // Add the updated currentParticipant to the participants list
-    setParticipants((prevState) => [updatedParticipant, ...prevState]);
-    setNavigateNow(true);
+    // setParticipants((prevState) => [updatedParticipant, ...prevState]);
+    // setNavigateNow(true);
   };
 
   //function to check the answer

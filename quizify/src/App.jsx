@@ -9,6 +9,7 @@ import { useState } from "react";
 function App() {
   const [participants, setParticipants] = useState([]);
   const [currentParticipant, setCurrentParticipant] = useState({
+    id:"",
     name: "",
     score: 0,
   });
@@ -35,3 +36,7 @@ function App() {
 }
 
 export default App;
+
+
+// update score when quiz finishes or time runs out. -> finish & quiz page
+// list all the participants and their score in finish page.

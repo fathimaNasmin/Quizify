@@ -8,6 +8,7 @@ import styled from "styled-components";
 import Form from "./Partials/Form";
 import { randomQuestions } from "../../questions";
 import { ParticipantsContext } from "../components/context/participants.jsx";
+import { editUserData } from "../appwrite/appwrite.js";
 
 export default function QuizPage() {
   // state to track the question index
@@ -20,12 +21,7 @@ export default function QuizPage() {
   const navigate = useNavigate();
 
   // use context to get participants and current participants
-  const {
-    participants,
-    setParticipants,
-    currentParticipant,
-    setCurrentParticipant,
-  } = useContext(ParticipantsContext);
+  const { currentParticipant } = useContext(ParticipantsContext);
 
   // Style for wrapper
   const wrapper = {
@@ -45,19 +41,30 @@ export default function QuizPage() {
   //   }
   // }, [isTimeOut, setIsTimeOut, navigate]);
 
-  const updateParticipantsList = async () => {
-    setParticipants((prevState) => [{ ...currentParticipant }, ...prevState]);
-  };
+  // const updateParticipantsList = async () => {
+  //   setParticipants((prevState) => [{ ...currentParticipant }, ...prevState]);
+  // };
 
   // Callback function to end the quiz when the timer runs out
   const handleTimeOut = () => {
-    updateParticipantsList()
+    editUserData(currentParticipant)
       .then(() => {
         setIsTimeOut(true);
       })
       .then(() => {
         navigate("/finish", { replace: true, state: { timeOut: isTimeOut } });
+      })
+      .catch((error) => {
+        console.log("Error:", error);
       });
+
+    // updateParticipantsList()
+    //   .then(() => {
+    //     setIsTimeOut(true);
+    //   })
+    //   .then(() => {
+    //     navigate("/finish", { replace: true, state: { timeOut: isTimeOut } });
+    //   });
   };
   return (
     <div className="quiz-background">

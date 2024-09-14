@@ -1,13 +1,22 @@
 import { useContext, useEffect } from "react";
 import { ParticipantsContext } from "../context/participants";
 import { randomQuestions } from "../../../questions";
+import { getAllParticipants } from "../../appwrite/appwrite";
 
 export default function Scoreboard() {
-  const { participants } = useContext(ParticipantsContext);
+  const { participants, setParticipants } = useContext(ParticipantsContext);
 
-  useEffect(()=>{
-
-  },[])
+  //Fetch all the participants
+  useEffect(() => {
+    getAllParticipants()
+      .then((data) => {
+        setParticipants(data.documents.reverse().slice(0, 5));
+        console.log(data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const scoreBoard = {
     display: "flex",
@@ -39,9 +48,9 @@ export default function Scoreboard() {
     <>
       <h3>Scoreboard</h3>
       <div style={scoreBoard}>
-        {participants.map((person, index) => {
+        {participants.map((person) => {
           return (
-            <div key={index} style={participantsStyle}>
+            <div key={person.id} style={participantsStyle}>
               <p style={pTagStyle}>{person.name}</p>
               <p style={pTagStyle}>
                 {person.score}/{randomQuestions.length}
